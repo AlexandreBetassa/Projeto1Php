@@ -1,0 +1,35 @@
+.border {
+    border: 2px solid black;
+}
+
+.text {
+    font-family: fantasy;
+    font-size: 20px;
+}
+
+.textBtn {
+    font-family: Arial;
+}
+
+.align-items {
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.body {
+    background-image: url("./img/php-post-1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+}
+
+.formColor {
+    background-color: white;
+    border-radius: 10px;
+}
