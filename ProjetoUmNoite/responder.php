@@ -1,5 +1,6 @@
 <?php
 $titulo = "Responder";
+include "./conexao.php";
 include "./cabecalho.php";
 $query = "select * from questoes order by id desc";
 $resultado = mysqli_query($conexao, $query);
