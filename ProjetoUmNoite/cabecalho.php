@@ -10,7 +10,7 @@
     <title><?php echo $titulo ?></title>
 </head>
 
-<body class="body">
+<body class="body img justify-content-center">
     <div class="container-fluid m-2 align-buttons d-flex formColor col-6">
         <nav class="navbar navbar-light bg-light col-12 justify-content-center">
                 <a href="./index.php" class="btn btn-primary textBtn m-1 align-buttons">Home</button></a>

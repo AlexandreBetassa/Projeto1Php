@@ -16,7 +16,7 @@ if (isset($_POST) && !empty($_POST) && !empty($_POST["pergunta"]) && !empty($_PO
     $resultado = mysqli_query($conexao, $query);
 }
 ?>
-<div class="container-fluid text-center mb-5 mt-1 col-12">
+<div class="container-fluid text-center d-flex mb-5 mt-1 col-12" style="width: 70rm;">
     <div class="container text-center border p-3 col-6 formColor">
         <div class="container">
             <form action="./index.php" method="post" class="text">
