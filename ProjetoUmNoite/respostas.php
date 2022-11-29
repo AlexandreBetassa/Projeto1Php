@@ -3,45 +3,53 @@ $titulo = "Respostas";
 include "./conexao.php";
 include "./cabecalho.php";
 
-if (isset($_POST) && !empty($_POST)) {
-    $resultado = $_POST;
-}
-for ($i = 0; $i < isset($resultado[$i]); $i++) {
-    $id = $resultado[$i]["id"];
-    echo $resultado[$i]["id"];
-}
-$query = "select * from questoes where id = $id";
-$resultado = mysqli_query($conexao, $query);
+$acertos = 0;
+foreach ($_POST as $chave => $valor) {
+    $query = "SELECT * FROM questoes WHERE id = " . $chave;
+    $resultado = mysqli_query($conexao, $query);
 
+    while ($linha = mysqli_fetch_array($resultado)) {
 ?>
-<div class="container" style="background-color: white; width:fit-content; border-radius: 20px">
-    <form action="./responder.php" method="post">
-        <div class="text-center mb-3 mt-3">
-            <button type="submit" class="btn btn-primary textBtn">Enviar Questionário</button>
-        </div>
-        <?php
-        while ($linha = print_r($resultado)) {
-        ?>
-            <div class="container d-flex justify-content-center">
-                <div class="card border-dark mb-3" style="width: 70rem;">
-                    <div class="card-header">
-                        <h5><?php echo $linha["pergunta"]; ?></h5>
-                    </div>
-                    <div class="card-body text-dark">
-                        <input class="form-check-input" type="radio" name="base" value="A" id="A" /> - <?php echo $linha["A"]; ?><br>
-                        <input class="form-check-input" type="radio" name="base" value="B" id="B" /> - <?php echo $linha["B"]; ?><br>
-                        <input class="form-check-input" type="radio" name="base" value="C" id="C" /> - <?php echo $linha["C"]; ?><br>
-                        <input class="form-check-input" type="radio" name="base" value="D" id="D" /> - <?php echo $linha["D"]; ?><br>
-                        <input class="form-check-input" type="radio" name="base" value="E" id="E" /> - <?php echo $linha["E"]; ?><br>
-                    </div>
+        <div class="container d-flex justify-content-center">
+            <div class="card border-dark mb-3" style="width: 70rem;">
+                <div class="card-header">
+                    <h5><?php echo $linha["pergunta"]; ?></h5>
+                </div>
+                <div class="card-body text-dark">
+                    <?php
+                    if (strtolower($linha["correta"]) != $_POST[$chave]) {
+                    ?>
+                        <div class="alert alert-danger" role="alert">
+                            Resposta - <?php echo $linha[$_POST[$chave]] ?>
+                        </div>
+                        <div class="alert alert-success" role="alert">
+                            Resposta Correta - <?php echo $linha[strtolower($linha["correta"])] ?>
+                        </div>
+                    <?php
+                    } else { ?>
+                        <div class="alert alert-success" role="alert">
+                            Resposta Correta - <?php echo $linha[strtolower($linha["correta"])] ?>
+                        </div>
+                    <?php
+                        $acertos += 1;
+                    } ?>
                 </div>
             </div>
-        <?php
-        }
-        ?>
-
-    </form>
+        </div>
+<?php
+    }
+}
+?>
 </div>
+<div class="alert alert-warning d-flex align-items-center justify-content-center" role="alert">
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </svg>
+    <div style="width:500px; height: 150px;" class="align-items-center justify-content-center d-flex text" >
+        <?php echo "Quantidade de acertos: " . $acertos ?>
+    </div>
+</div>
+
 <?php
 include "./rodape.php";
 ?>

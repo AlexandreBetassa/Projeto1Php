@@ -2,19 +2,6 @@
 $titulo = "Cadastro";
 include "./cabecalho.php";
 include "./conexao.php";
-
-if (isset($_POST) && !empty($_POST) && !empty($_POST["pergunta"]) && !empty($_POST["correta"])) {
-    $pergunta = $_POST["pergunta"];
-    $a = $_POST["A"];
-    $b = $_POST["B"];
-    $c = $_POST["C"];
-    $d = $_POST["D"];
-    $e = $_POST["E"];
-    $correta = $_POST["correta"];
-
-    $query = "insert into questoes (pergunta, a, b, c, d, e, correta) values('$pergunta','$a', '$b', '$c', '$d', '$e', '$correta')";
-    $resultado = mysqli_query($conexao, $query);
-}
 ?>
 <div class="container-fluid text-center d-flex mb-5 mt-1 col-12" style="width: 70rm;">
     <div class="container text-center border p-3 col-6 formColor">
@@ -44,7 +31,7 @@ if (isset($_POST) && !empty($_POST) && !empty($_POST["pergunta"]) && !empty($_PO
                 <br><br>
 
                 <label for="" class="form-label">D)</label>
-                <input type="radio" name="correta" value="E" />
+                <input type="radio" name="correta" value="D" />
                 <input type="text" name="D" />
 
                 <br><br>
